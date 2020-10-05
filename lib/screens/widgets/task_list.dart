@@ -8,8 +8,6 @@ class TaskList extends StatelessWidget {
 
   TaskList({@required this.tasks});
 
-
-
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -18,8 +16,6 @@ class TaskList extends StatelessWidget {
   }
 
   List<Widget> getChildrenTasks() {
-    var something =  tasks.map((todo) => TaskListItem(task: todo)).toList();
-    print(something);
-    return something;
+    return tasks.map((todo) => TaskListItem(task: todo)).toList();
   }
 }
