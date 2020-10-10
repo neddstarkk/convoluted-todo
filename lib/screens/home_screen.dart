@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import 'package:todo/provider/todo_model.dart';
 import 'package:todo/screens/add_task.dart';
 import 'package:todo/screens/all_tasks.dart';
 import 'package:todo/screens/completed_tasks.dart';
@@ -11,8 +9,7 @@ class HomeScreen extends StatefulWidget {
   _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
-    with SingleTickerProviderStateMixin {
+class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     // TODO: implement initState

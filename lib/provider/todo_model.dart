@@ -1,35 +1,50 @@
 import 'dart:collection';
 
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:sqflite/sqflite.dart';
+import 'package:todo/database/database_helper.dart';
 import 'package:todo/models/tasks.dart';
 
 class TodoModel extends ChangeNotifier {
-  final List<Task> _tasks = [
+  DatabaseHelper databaseHelper = DatabaseHelper();
 
-  ];
+  List<Task> tasks = [];
 
-  UnmodifiableListView<Task> get allTasks => UnmodifiableListView(_tasks);
+  UnmodifiableListView<Task> get allTasks => UnmodifiableListView(tasks);
 
   UnmodifiableListView<Task> get completeTasks =>
-      UnmodifiableListView(_tasks.where((todo) => todo.completed));
+      UnmodifiableListView(tasks.where((todo) => todo.completed));
 
   UnmodifiableListView<Task> get incompleteTasks =>
-      UnmodifiableListView(_tasks.where((todo) => !todo.completed));
+      UnmodifiableListView(tasks.where((todo) => !todo.completed));
 
-  void addTodo(Task task) {
-    _tasks.add(task);
+  void addTodo(Task task) async {
+    tasks.add(task);
+    int result = await databaseHelper.insertTodo(task);
     notifyListeners();
   }
 
   void toggleTodo(Task task) {
-    final taskIndex = _tasks.indexOf(task);
-    _tasks[taskIndex].toggleComplete();
+    final taskIndex = tasks.indexOf(task);
+    tasks[taskIndex].toggleComplete();
+    var result = databaseHelper.updateTodoCompleted(task);
     notifyListeners();
   }
 
-  void deleteTodo(Task task) {
-    _tasks.remove(task);
+  void deleteTodo(Task task) async {
+    tasks.remove(task);
+    int result = await databaseHelper.deleteTodo(task.id);
     notifyListeners();
+  }
+
+  void updateTaskList() {
+    final Future<Database> dbFuture = databaseHelper.initialiseDatabase();
+    dbFuture.then((database) {
+      Future<List<Task>> taskListFuture = databaseHelper.getTaskList();
+      taskListFuture.then((todoList) {
+        this.tasks = todoList;
+        notifyListeners();
+      });
+    });
   }
 }
