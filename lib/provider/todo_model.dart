@@ -21,20 +21,19 @@ class TodoModel extends ChangeNotifier {
   void addTodo(Task task) async {
     tasks.add(task);
     int result = await databaseHelper.insertTodo(task);
-    print(result);
     notifyListeners();
   }
 
   void toggleTodo(Task task) {
     final taskIndex = tasks.indexOf(task);
     tasks[taskIndex].toggleComplete();
+    var result = databaseHelper.updateTodoCompleted(task);
     notifyListeners();
   }
 
   void deleteTodo(Task task) async {
     tasks.remove(task);
     int result = await databaseHelper.deleteTodo(task.id);
-    print(result);
     notifyListeners();
   }
 
