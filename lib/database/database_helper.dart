@@ -55,7 +55,7 @@ class DatabaseHelper {
     return result;
   }
 
-  // Insert Operation: Insert a todo object to database
+  // Insert Operation: Insert a task object to database
   Future<int> insertTodo(Task task) async {
     Database db = await this.database;
     var result = await db.insert(todoTable, task.toMap());
@@ -76,14 +76,14 @@ class DatabaseHelper {
     return result;
   }
 
-  // Get the 'Map List' [ List<Map> ] and convert it to 'todo List' [ List<Todo> ]
+  // Get the 'Map List' [ List<Map> ] and convert it to 'task List' [ List<Task> ]
   Future<List<Task>> getTaskList() async {
 
     var taskMapList = await getTodoMapList(); // Get 'Map List' from database
     int count = taskMapList.length;         // Count the number of map entries in db table
 
     List<Task> taskList = List<Task>();
-    // For loop to create a 'todo List' from a 'Map List'
+    // For loop to create a 'task List' from a 'Map List'
     for (int i = 0; i < count; i++) {
       taskList.add(Task.fromMapObject(taskMapList[i]));
     }
