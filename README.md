@@ -1,16 +1,12 @@
-# todo
+# Convoluted Todo
 
-A new Flutter project.
+This is a complicated todo application which will support a ton of features over time
 
-## Getting Started
+## Purpose
 
-This project is a starting point for a Flutter application.
+If you backtrack and start from the first commit, you can see how the project evolved and how newer features were added into an existing codebase over time.
 
-A few resources to get you started if this is your first Flutter project:
+## List of features till now (from a learning POV) 
 
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+* State Management using Provider
+* Local Device Data Persistence using SQLite 
