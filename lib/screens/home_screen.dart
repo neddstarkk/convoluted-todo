@@ -3,6 +3,7 @@ import 'package:todo/screens/add_task.dart';
 import 'package:todo/screens/all_tasks.dart';
 import 'package:todo/screens/completed_tasks.dart';
 import 'package:todo/screens/incomplete_tasks.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreen extends StatefulWidget {
   @override
@@ -10,10 +11,24 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool authRequired = false;
   @override
   void initState() {
     // TODO: implement initState
+    initializeAuthRequired();
     super.initState();
+
+  }
+
+  initializeAuthRequired() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    authRequired = prefs.getBool("FingerPrint");
+  }
+
+  addBoolToSP(bool value) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.setBool("FingerPrint", value);
+    prefs.reload();
   }
 
   @override
@@ -48,6 +63,34 @@ class _HomeScreenState extends State<HomeScreen> {
                 Tab(
                   text: "Incomplete",
                 ),
+              ],
+            ),
+          ),
+          drawer: Drawer(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                Container(height: 200, color: Colors.blue,),
+                Container(
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: Text("Require Fingerprint"),
+                      ),
+                      Switch(
+                        value: authRequired,
+                        onChanged: (bool val) {
+                          setState(() {
+                            authRequired = !authRequired;
+                            addBoolToSP(authRequired);
+                          });
+                        },
+                      )
+                    ],
+                  ),
+                )
               ],
             ),
           ),
