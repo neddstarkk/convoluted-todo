@@ -32,7 +32,9 @@ class _AppState extends State<App> {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
       create: (_) => TodoModel(),
-      child: MaterialApp(home: boolValue == true ? FingerprintAuth() : HomeScreen()),
+      child: MaterialApp(
+          debugShowCheckedModeBanner: false,
+          home: boolValue == true ? FingerprintAuth() : HomeScreen()),
     );
   }
 }
