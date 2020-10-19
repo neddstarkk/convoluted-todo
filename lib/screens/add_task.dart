@@ -97,7 +97,7 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
     await flutterLocalNotificationsPlugin.zonedSchedule(
       0,
       'Reminder',
-      'scheduled body',
+      '${taskTitleController.text}',
       scheduleNotificationDateTime,
       platformChannelSpecifics,
       uiLocalNotificationDateInterpretation:
