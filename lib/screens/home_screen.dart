@@ -12,15 +12,15 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool authRequired = false;
+
   @override
   void initState() {
     // TODO: implement initState
     initializeAuthRequired();
     super.initState();
-
   }
 
-  initializeAuthRequired() async{
+  initializeAuthRequired() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     authRequired = prefs.getBool("FingerPrint");
   }
@@ -36,71 +36,73 @@ class _HomeScreenState extends State<HomeScreen> {
     return DefaultTabController(
       length: 3,
       child: Scaffold(
-          appBar: AppBar(
-            centerTitle: true,
-            title: Text("Todos"),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => AddTaskScreen(),
+        appBar: AppBar(
+          centerTitle: true,
+          title: Text("Todos"),
+          bottom: TabBar(
+            tabs: [
+              Tab(
+                text: "All",
+              ),
+              Tab(
+                text: "Complete",
+              ),
+              Tab(
+                text: "Incomplete",
+              ),
+            ],
+          ),
+        ),
+        drawer: Drawer(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              Container(
+                height: 200,
+                color: Colors.blue,
+              ),
+              Container(
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(left: 10),
+                      child: Text("Require Fingerprint"),
                     ),
-                  );
-                },
-                icon: Icon(Icons.add),
+                    Switch(
+                      value: authRequired,
+                      onChanged: (bool val) {
+                        setState(() {
+                          authRequired = !authRequired;
+                          addBoolToSP(authRequired);
+                        });
+                      },
+                    )
+                  ],
+                ),
               )
             ],
-            bottom: TabBar(
-              tabs: [
-                Tab(
-                  text: "All",
-                ),
-                Tab(
-                  text: "Complete",
-                ),
-                Tab(
-                  text: "Incomplete",
-                ),
-              ],
-            ),
           ),
-          drawer: Drawer(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                Container(height: 200, color: Colors.blue,),
-                Container(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.only(left: 10),
-                        child: Text("Require Fingerprint"),
-                      ),
-                      Switch(
-                        value: authRequired,
-                        onChanged: (bool val) {
-                          setState(() {
-                            authRequired = !authRequired;
-                            addBoolToSP(authRequired);
-                          });
-                        },
-                      )
-                    ],
-                  ),
-                )
-              ],
-            ),
-          ),
-          body: TabBarView(
-            children: [
-              AllTasks(),
-              CompletedTasks(),
-              IncompleteTasks(),
-            ],
-          )),
+        ),
+        body: TabBarView(
+          children: [
+            AllTasks(),
+            CompletedTasks(),
+            IncompleteTasks(),
+          ],
+        ),
+        floatingActionButton: FloatingActionButton(
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => AddTaskScreen(),
+                ),
+              );
+            },
+          child: Icon(Icons.add),
+        ),
+      ),
     );
   }
 }
