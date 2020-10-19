@@ -33,7 +33,9 @@ dependencies:
   path_provider: ^1.6.18
   local_auth: ^0.6.3+2
   shared_preferences: ^0.5.12
-
+  flutter_local_notifications: ^2.0.1
+  flutter_datetime_picker: ^1.4.0
+  intl: ^0.16.1
 
 dev_dependencies:
   flutter_test:
