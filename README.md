@@ -10,3 +10,5 @@ If you backtrack and start from the first commit, you can see how the project ev
 
 * State Management using Provider
 * Local Device Data Persistence using SQLite 
+* Fingerprint Authentication and shared preference to enable/disable it.
+* Reminder notifications for each task
