@@ -194,7 +194,9 @@ class _AddTaskScreenState extends State<AddTaskScreen> {
                   RaisedButton(
                     child: Text("Add"),
                     onPressed: () {
-                      scheduleNotification();
+                      if(setReminder == true && completedStatus == false) {
+                        scheduleNotification();
+                      }
                       onAdd();
                     },
                   )

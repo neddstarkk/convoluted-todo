@@ -34,6 +34,7 @@ class _AppState extends State<App> {
       create: (_) => TodoModel(),
       child: MaterialApp(
           debugShowCheckedModeBanner: false,
+          theme: ThemeData.dark(),
           home: boolValue == true ? FingerprintAuth() : HomeScreen()),
     );
   }
