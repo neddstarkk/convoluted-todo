@@ -14,6 +14,6 @@ If you backtrack and start from the first commit, you can see how the project ev
 * Reminder notifications for each task
 
 ## Screenshots
-
-![home screen](Screenshot_20201228-150004.png)
-![add task](Screenshot_20201228-150012.png) 
+<pre>
+<img src="Screenshot_20201228-150004.png" alt="drawing" width="200"/>   <img src="Screenshot_20201228-150012.png" alt="drawing" width="200"/> 
+</pre>
