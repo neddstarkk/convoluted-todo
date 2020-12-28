@@ -2,6 +2,10 @@
 
 This is a complicated todo application which will support a ton of features over time
 
+## Screenshot
+
+![Screenshot](/screenshots/main.png?raw=true)
+
 ## Purpose
 
 If you backtrack and start from the first commit, you can see how the project evolved and how newer features were added into an existing codebase over time.
